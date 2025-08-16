@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document> 
+  <page fromindex="0"> 
+    <item> 
+      <key>表单类型</key>  
+      <value confidence="0.9991130828857422" get="add">交际费报销申请</value> 
+    </item>  
+    <item> 
+      <key>表单标题</key>  
+      <value confidence="0.9802650213241577" get="add">交际费-E202506-0050-客户关系维护-882.00-黄文希-地区客户销售2课-2025-</value> 
+    </item>  
+    <item> 
+      <key>附件</key>  
+      <value confidence="0.9879602193832397" get="add">（2）邮件审批 SiEN.pdf 25922000000037211962科意半导体设备（上海）有限公司.pdf</value> 
+    </item>  
+    <item> 
+      <key>申请单号</key>  
+      <value confidence="0.999657154083252" get="add">5000024102</value> 
+    </item>  
+    <item> 
+      <key>原因</key>  
+      <value confidence="0.9544433951377869" get="add"/> 
+    </item>  
+    <item> 
+      <key>请购订单</key>  
+      <value confidence="0.9930586814880371" get="add">E202506-0050</value> 
+    </item>  
+    <item> 
+      <key>申请人</key>  
+      <value confidence="0.9877632856369019" get="add">黄文希</value> 
+    </item>  
+    <item> 
+      <key>部门</key>  
+      <value confidence="0.9939172863960266" get="add">地区客户销售2课</value> 
+    </item>  
+    <item> 
+      <key>备注</key>  
+      <value confidence="0.9878450036048889" get="add"/> 
+    </item>  
+    <item> 
+      <key>收款人</key>  
+      <value confidence="0.9968603253364563" get="Payee_Name">黄文希</value> 
+    </item>  
+    <item> 
+      <key>收款人代码</key>  
+      <value confidence="0.9993599057197571" get="Payee_ID">C220105</value> 
+    </item>  
+    <item> 
+      <key>货币</key>  
+      <value confidence="0.9903165102005005" get="add">CNY</value> 
+    </item>  
+    <item> 
+      <key>申请金额</key>  
+      <value confidence="0.9990139007568359" get="QSMoney">882.00</value> 
+    </item>  
+    <item> 
+      <key>日期</key>  
+      <value confidence="0.9904712438583374" get="add">20250623</value> 
+    </item>  
+    <item> 
+      <key>地点</key>  
+      <value confidence="0.981552004814148" get="add">青岛</value> 
+    </item>  
+    <item> 
+      <key>出席人数</key>  
+      <value confidence="0.9935774803161621" get="add">6</value> 
+    </item>  
+    <item> 
+      <key>每人单价</key>  
+      <value confidence="0.9946002960205078" get="CQ00_DJ">147.00</value> 
+    </item>  
+    <item> 
+      <key>总数</key>  
+      <value confidence="0.9989785552024841" get="add">882.00</value> 
+    </item>  
+    <item> 
+      <key>货币</key>  
+      <value confidence="0.9957559108734131" get="add">CNY</value> 
+    </item>  
+    <table name="审批流程" get="add"> 
+      <row rid="1"> 
+        <item> 
+          <key>申请者</key>  
+          <value confidence="0.9417955875396729">黄文希</value> 
+        </item>  
+        <item> 
+          <key>申请者日期</key>  
+          <value confidence="0.9979780912399292">20250626</value> 
+        </item>  
+        <item> 
+          <key>担当</key>  
+          <value confidence="0.9963748455047607">王仲薇</value> 
+        </item>  
+        <item> 
+          <key>担当日期</key>  
+          <value confidence="0.9978272318840027">20250630</value> 
+        </item>  
+        <item> 
+          <key>主任/经理</key>  
+          <value confidence="0.8310766220092773">李晓骏</value> 
+        </item>  
+        <item> 
+          <key>主任/经理日期</key>  
+          <value confidence="0.9968647956848145">20250630</value> 
+        </item>  
+        <item> 
+          <key>課長/经理</key>  
+          <value confidence="0.9919918179512024">孟德崑</value> 
+        </item>  
+        <item> 
+          <key>課長/经理日期</key>  
+          <value confidence="0.9972904920578003">20250630</value> 
+        </item>  
+        <item> 
+          <key>部長/高级经理</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>部長/高级经理日期</key>  
+          <value confidence=""/> 
+        </item> 
+      </row> 
+    </table>  
+    <table name="最终审核" get="add"> 
+      <row rid="1"> 
+        <item> 
+          <key>审核人</key>  
+          <value confidence="0.9974141120910645">徐强</value> 
+        </item>  
+        <item> 
+          <key>审核人日期</key>  
+          <value confidence="0.9990257024765015">20250630</value> 
+        </item>  
+        <item> 
+          <key>部長/高级经理</key>  
+          <value confidence="0.9979444146156311">戴震宇</value> 
+        </item>  
+        <item> 
+          <key>部長/高级经理日期</key>  
+          <value confidence="0.9966742396354675">20250630</value> 
+        </item>  
+        <item> 
+          <key>总经理</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>总经理日期</key>  
+          <value confidence=""/> 
+        </item> 
+      </row> 
+    </table>  
+    <table name="申请资料" get="add"> 
+      <row rid="1"> 
+        <item> 
+          <key>出席者种类</key>  
+          <value confidence="0.9997812509536743">宾客</value> 
+        </item>  
+        <item> 
+          <key>供货商名称</key>  
+          <value confidence="0.9995050430297852">曹辰</value> 
+        </item>  
+        <item> 
+          <key>职衔</key>  
+          <value confidence="0.9998441338539124">采购经理</value> 
+        </item>  
+        <item> 
+          <key>公司</key>  
+          <value confidence="0.9862246513366699">SiEN</value> 
+        </item> 
+      </row>  
+      <row rid="2"> 
+        <item> 
+          <key>出席者种类</key>  
+          <value confidence="0.9995982646942139">宾客</value> 
+        </item>  
+        <item> 
+          <key>供货商名称</key>  
+          <value confidence="0.9947112798690796">邓悦</value> 
+        </item>  
+        <item> 
+          <key>职衔</key>  
+          <value confidence="0.9978711009025574">leader</value> 
+        </item>  
+        <item> 
+          <key>公司</key>  
+          <value confidence="0.9777918457984924">SiEN</value> 
+        </item> 
+      </row>  
+      <row rid="3"> 
+        <item> 
+          <key>出席者种类</key>  
+          <value confidence="0.9993873238563538">宾客</value> 
+        </item>  
+        <item> 
+          <key>供货商名称</key>  
+          <value confidence="0.9997029900550842">马连升</value> 
+        </item>  
+        <item> 
+          <key>职衔</key>  
+          <value confidence="0.9998250007629395">采购</value> 
+        </item>  
+        <item> 
+          <key>公司</key>  
+          <value confidence="0.9852504730224609">SiEN</value> 
+        </item> 
+      </row>  
+      <row rid="4"> 
+        <item> 
+          <key>出席者种类</key>  
+          <value confidence="0.9991856813430786">宾客</value> 
+        </item>  
+        <item> 
+          <key>供货商名称</key>  
+          <value confidence="0.9992890954017639">宋乃绪</value> 
+        </item>  
+        <item> 
+          <key>职衔</key>  
+          <value confidence="0.9999304413795471">主任</value> 
+        </item>  
+        <item> 
+          <key>公司</key>  
+          <value confidence="0.9908978343009949">SiEN</value> 
+        </item> 
+      </row>  
+      <row rid="5"> 
+        <item> 
+          <key>出席者种类</key>  
+          <value confidence="0.9994264841079712">宾客</value> 
+        </item>  
+        <item> 
+          <key>供货商名称</key>  
+          <value confidence="0.9998257160186768">娄培阳</value> 
+        </item>  
+        <item> 
+          <key>职衔</key>  
+          <value confidence="0.9985558390617371">user</value> 
+        </item>  
+        <item> 
+          <key>公司</key>  
+          <value confidence="0.9896628856658936">SiEN</value> 
+        </item> 
+      </row>  
+      <row rid="6"> 
+        <item> 
+          <key>出席者种类</key>  
+          <value confidence="0.9995709657669067">本社员工</value> 
+        </item>  
+        <item> 
+          <key>供货商名称</key>  
+          <value confidence="0.9608287215232849">黄文希</value> 
+        </item>  
+        <item> 
+          <key>职衔</key>  
+          <value confidence="0.9998870491981506">销售</value> 
+        </item>  
+        <item> 
+          <key>公司</key>  
+          <value confidence="0.9894726872444153">KE</value> 
+        </item> 
+      </row> 
+    </table>  
+    <table name="详情入项" get="HKCH_311_ZL"> 
+      <row rid="1" rowindex="0"> 
+        <item> 
+          <key>行</key>  
+          <value confidence="0.999993085861206" get="add">1</value> 
+        </item>  
+        <item> 
+          <key>供货商/收款人</key>  
+          <value confidence="0.9418427348136902" get="add">黄文希（C220105)</value> 
+        </item>  
+        <item> 
+          <key>详情</key>  
+          <value confidence="0.9901562929153442" get="add">CQ00/CQ99-BB0138（地区客户销售2课）-550212（管理费用-交际费）</value> 
+        </item>  
+        <item> 
+          <key>记账比例</key>  
+          <value confidence="0.9738770723342896" get="add">0</value> 
+        </item>  
+        <item> 
+          <key>金额</key>  
+          <value confidence="0.9993257522583008" get="ZL_Money">882.00</value> 
+        </item> 
+      </row> 
+    </table>  
+    <table name="发票资料" get="add"> 
+      <row rid="1"> 
+        <item> 
+          <key>附件</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>供货商/收款人</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>发票编号</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>发票日期</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>到期日</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>发票金额</key>  
+          <value confidence=""/> 
+        </item> 
+      </row> 
+    </table>  
+    <table name="预算资料" get="add"> 
+      <row rid="1"> 
+        <item> 
+          <key>记账资料</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>预算</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>已使用金额</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>此次金额</key>  
+          <value confidence=""/> 
+        </item>  
+        <item> 
+          <key>结余</key>  
+          <value confidence=""/> 
+        </item> 
+      </row> 
+    </table> 
+  </page> 
+</document>

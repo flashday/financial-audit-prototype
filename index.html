@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财务共享服务中心智能识别与审核演示</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>财务共享服务中心智能识别与审核演示</h1>
+    </header>
+
+    <main class="main-container">
+
+        <aside id="control-panel">
+            <div class="control-group">
+                <h2>1. 上传图片</h2>
+                <p>点击下方按钮，模拟上传面单、发票、附件三类单据。</p>
+                <button data-action="upload">模拟上传</button>
+            </div>
+
+            <div id="recognition-step" class="control-group disabled">
+                <h2>2. 识别</h2>
+                <button data-action="recognize-waybill" disabled>2.1 识别面单</button>
+                <button data-action="recognize-invoice" disabled>2.2 识别发票</button>
+                <button data-action="recognize-attachment" disabled>2.3 识别附件</button>
+            </div>
+
+            <div id="audit-step" class="control-group disabled">
+                <h2>3. 智能审核</h2>
+                <button data-action="audit" disabled>3. 智能审核</button>
+            </div>
+        </aside>
+
+        <section id="display-panel">
+            <div class="placeholder">
+                <p>请点击左侧按钮开始操作</p>
+            </div>
+            <div id="image-display" class="hidden">
+                <img src="" alt="单据图片">
+            </div>
+            <div id="results-display" class="hidden">
+                <h3>识别结果</h3>
+                <div id="results-content"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

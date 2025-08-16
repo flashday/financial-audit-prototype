@@ -1,0 +1,14 @@
+.venv/
+.样本/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+# Visual Studio Code
+.vscode/
+# PyCharm
+.idea/
+# 这些文件可能包含数据库密码、API 密钥等敏感信息，绝不能提交。
+*.env
+.env.*

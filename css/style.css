@@ -1,0 +1,182 @@
+/* 全局样式和基本重置 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 标题样式 */
+header {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #0056b3;
+}
+
+/* 主容器Flexbox布局 */
+.main-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* 左侧控制面板 */
+#control-panel {
+    flex: 0 0 300px; /* 固定宽度300px，不伸缩 */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.control-group {
+    margin-bottom: 25px;
+}
+
+.control-group h2 {
+    font-size: 18px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+.control-group p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 按钮样式 */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 禁用状态的按钮和控件组 */
+button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+.control-group.disabled {
+    opacity: 0.5;
+}
+
+/* 右侧内容展示区 */
+#display-panel {
+    flex: 1; /* 占据剩余所有空间 */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #999;
+    font-size: 18px;
+}
+
+#image-display {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#image-display img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+}
+
+#results-display {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#results-content pre {
+    white-space: pre-wrap; /* 自动换行 */
+    word-wrap: break-word;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* --- 新增：定制化结果显示样式 --- */
+
+/* 面单 (XML) 显示样式 */
+.xml-display ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+.xml-display.tag-name {
+    font-weight: bold;
+    color: #0056b3;
+}
+.xml-display.tag-content {
+    color: #333;
+}
+
+/* 发票 (JSON) 显示样式 */
+.invoice-summary {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.summary-item.key {
+    font-weight: bold;
+}
+.invoice-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.invoice-details-table th,.invoice-details-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.invoice-details-table th {
+    background-color: #e9ecef;
+}
+
+/* 辅助类 */
+.hidden {
+    display: none;
+}
