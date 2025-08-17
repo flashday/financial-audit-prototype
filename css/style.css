@@ -114,6 +114,7 @@ button:disabled {
     max-width: 100%;
     height: auto;
     max-height: 400px;
+    transition: transform 0.2s ease-in-out; /* 平滑缩放动画 */
 }
 
 #results-display {
@@ -133,47 +134,36 @@ button:disabled {
     margin: 0;
 }
 
-/* --- 新增：定制化结果显示样式 --- */
+/* --- 定制化结果显示样式 --- */
+.xml-display ul { list-style-type: none; padding-left: 20px; }
+.xml-display.tag-name { font-weight: bold; color: #0056b3; }
+.xml-display.tag-content { color: #333; }
+.invoice-summary { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ccc; }
+.summary-item { display: flex; justify-content: space-between; padding: 5px 0; }
+.summary-item.key { font-weight: bold; }
+.invoice-details-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.invoice-details-table th,.invoice-details-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+.invoice-details-table th { background-color: #e9ecef; }
 
-/* 面单 (XML) 显示样式 */
-.xml-display ul {
-    list-style-type: none;
-    padding-left: 20px;
-}
-.xml-display.tag-name {
-    font-weight: bold;
-    color: #0056b3;
-}
-.xml-display.tag-content {
-    color: #333;
-}
-
-/* 发票 (JSON) 显示样式 */
-.invoice-summary {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #ccc;
-}
-.summary-item {
+/* --- 新增：图片控制按钮样式 --- */
+#image-controls {
     display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
 }
-.summary-item.key {
-    font-weight: bold;
+
+#image-controls button {
+    width: auto; /* 覆盖全局按钮宽度 */
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #6c757d;
+    border-radius: 4px;
 }
-.invoice-details-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-.invoice-details-table th,.invoice-details-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-.invoice-details-table th {
-    background-color: #e9ecef;
+
+#image-controls button:hover {
+    background-color: #5a6268;
 }
 
 /* 辅助类 */
