@@ -1,10 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Part 1: 数据与状态管理 ---
+ // --- Part 1: 数据与状态管理 ---
     const mockData = {
-        'recognize-waybill': { image: 'img/waybill_sample.png', format: 'xml', results: `<?xml version="1.0" encoding="UTF-8"?><Waybill><WaybillNumber>SF1234567890123</WaybillNumber><Sender><Name>张三</Name><Phone>13800138000</Phone><Address>广东省深圳市南山区科技园</Address></Sender><Recipient><Name>李四</Name><Phone>13900139000</Phone><Address>北京市海淀区中关村</Address></Recipient><Item>文件</Item><Confidence>0.98</Confidence></Waybill>` },
+        'recognize-waybill': {
+            image: 'img/waybill_sample.png',
+            format: 'xml',
+            results: `<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <page>
+        <item>
+            <name>运单号</name>
+            <value>SF1234567890123</value>
+        </item>
+        <item>
+            <name>寄件人</name>
+            <value>张三, 13800138000</value>
+        </item>
+        <item>
+            <name>收件人</name>
+            <value>李四, 13900139000</value>
+        </item>
+        <item>
+            <name>物品</name>
+            <value>文件</value>
+        </item>
+        <table name="费用明细">
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>金额</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>运费</td>
+                    <td>18.00</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>保价费</td>
+                    <td>2.00</td>
+                    <td>保价2000元</td>
+                </tr>
+            </tbody>
+        </table>
+    </page>
+</document>`
+        },
         'recognize-invoice': { image: 'img/invoice_sample.png', format: 'json', results: { "类型": "增值税普通发票", "发票代码": "031001900111", "发票号码": "GHOHH_1", "开票日期": "2019-10-31", "购买方": { "名称": "Dr. 约翰· 多" }, "销售方": { "名称": "开科思（上海）商务信息咨询有限公司" }, "金额合计": "3089.90", "税额合计": "174.90", "发票详单": [{ "项目名称": "标准润色 Job code: GHOHH_1", "金额": "1827.00", "税率": "6%" }, { "项目名称": "稿件格式排版", "金额": "1088.00", "税率": "6%" }] } },
-        'recognize-attachment': { image: 'img/attachment_sample.png', format: 'text', results: `Approved\n\n地区设备销售部李晓骏\nKOKUSAI ELECTRIC\n科意半导体设备（上海）有限公司\n预算：350RMB/人Total:6人=2100RMB` },
+        'recognize-attachment': { image: 'img/attachment_sample.png', format: 'text', results: `Approved\n\n地区设备销售部李某某 \n某某设备（上海）有限公司\n预算：250RMB/人Total:6人=1100RMB` },
         'audit': { images: ['img/waybill_sample.png', 'img/invoice_sample.png', 'img/attachment_sample.png'], format: 'json', results: { "审核结果": "审核通过", "审核规则符合项": [{ "规则": "发票与附件金额匹配", "状态": "通过" }, { "规则": "发票信息合规性检查", "状态": "通过" }, { "规则": "报销政策检查", "状态": "通过" }], "风险提示": "无" } }
     };
 
@@ -112,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             contentHtml = renderDefaultJson(auditResultWithPrompt);
         } else {
             switch (data.format) {
-                case 'xml': contentHtml = renderXml(data.results); break;
+                case 'xml': contentHtml = renderWaybillXml(data.results); break;
                 case 'json': contentHtml = renderInvoiceJson(data.results); break;
                 case 'text': contentHtml = renderText(data.results); break;
                 default: contentHtml = `<pre>${JSON.stringify(data.results, null, 2)}</pre>`;
@@ -214,7 +259,68 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsDataURL(file);
     }
 
-    // --- Part 7: 辅助与渲染函数 (无修改) ---
+      // --- Part 7: 渲染函数 ---
+    function renderWaybillXml(xmlString) {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+        let html = '<div class="waybill-result-container">';
+
+        // Render items
+        html += '<h4>基本信息</h4>';
+        const items = xmlDoc.querySelectorAll('page > item');
+        items.forEach(item => {
+            const name = item.querySelector('name')?.textContent || 'N/A';
+            const value = item.querySelector('value')?.textContent || 'N/A';
+            html += `<div class="xml-item"><span class="xml-key">${name}:</span><span class="xml-value">${value}</span></div>`;
+        });
+
+        // Render tables
+        const tables = xmlDoc.querySelectorAll('page > table');
+        tables.forEach(table => {
+            const tableName = table.getAttribute('name') || '识别表格';
+            html += `<h4>${tableName}</h4>`;
+            html += '<table class="data-table">';
+            
+            // Head
+            const headers = table.querySelectorAll('thead th');
+            if (headers.length > 0) {
+                html += '<thead><tr>';
+                headers.forEach(th => { html += `<th>${th.textContent}</th>`; });
+                html += '</tr></thead>';
+            }
+
+            // Body
+            const rows = table.querySelectorAll('tbody tr');
+            if (rows.length > 0) {
+                html += '<tbody>';
+                rows.forEach(row => {
+                    html += '<tr>';
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach(td => { html += `<td>${td.textContent}</td>`; });
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+            }
+            html += '</table>';
+        });
+
+        html += '</div>';
+        return html;
+    }
+
+    function renderInvoiceJson(data) {
+        let html = '<div class="invoice-summary">';
+        html += `<div class="summary-item"><span class="key">发票号码:</span> <span>${data['发票号码']}</span></div>`;
+        html += `<div class="summary-item"><span class="key">发票金额:</span> <span>¥${data['金额合计']}</span></div>`;
+        html += `<div class="summary-item"><span class="key">发票税额:</span> <span>¥${data['税额合计']}</span></div>`;
+        html += '</div><h4>购买明细</h4><table class="invoice-details-table"><thead><tr><th>项目名称</th><th>金额</th><th>税率</th></tr></thead><tbody>';
+        data['发票详单'].forEach(item => { html += `<tr><td>${item['项目名称']}</td><td>${item['金额']}</td><td>${item['税率']}</td></tr>`; });
+        html += '</tbody></table>'; return html;
+    }
+    function renderText(textData) { return `<pre>${textData}</pre>`; }
+    function renderDefaultJson(jsonData) { return `<pre>${JSON.stringify(jsonData, null, 2)}</pre>`; }
+
+    // --- Part 8: 辅助函数 ---
     function handleNavigation(direction) {
         const images = mockData['audit'].images;
         const total = images.length;
@@ -235,31 +341,4 @@ document.addEventListener('DOMContentLoaded', () => {
         appState.audit.zoomLevel = level;
         imgElement.style.transform = `scale(${level})`;
     }
-    function renderXml(xmlString) {
-        const parser = new DOMParser(); const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-        let html = '<div class="xml-display"><ul>';
-        function parseNode(node) {
-            const children = Array.from(node.children);
-            if (children.length > 0) {
-                html += `<li><span class="tag-name">${node.tagName}:</span><ul>`;
-                children.forEach(parseNode);
-                html += '</ul></li>';
-            } else {
-                html += `<li><span class="tag-name">${node.tagName}:</span> <span class="tag-content">${node.textContent}</span></li>`;
-            }
-        }
-        parseNode(xmlDoc.documentElement);
-        html += '</ul></div>'; return html;
-    }
-    function renderInvoiceJson(data) {
-        let html = '<div class="invoice-summary">';
-        html += `<div class="summary-item"><span class="key">发票号码:</span> <span>${data['发票号码']}</span></div>`;
-        html += `<div class="summary-item"><span class="key">发票金额:</span> <span>¥${data['金额合计']}</span></div>`;
-        html += `<div class="summary-item"><span class="key">发票税额:</span> <span>¥${data['税额合计']}</span></div>`;
-        html += '</div><h4>购买明细</h4><table class="invoice-details-table"><thead><tr><th>项目名称</th><th>金额</th><th>税率</th></tr></thead><tbody>';
-        data['发票详单'].forEach(item => { html += `<tr><td>${item['项目名称']}</td><td>${item['金额']}</td><td>${item['税率']}</td></tr>`; });
-        html += '</tbody></table>'; return html;
-    }
-    function renderText(textData) { return `<pre>${textData}</pre>`; }
-    function renderDefaultJson(jsonData) { return `<pre>${JSON.stringify(jsonData, null, 2)}</pre>`; }
 });

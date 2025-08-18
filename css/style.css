@@ -60,13 +60,12 @@ button:hover { background-color: #0056b3; }
 button:disabled { background-color: #c0c0c0; cursor: not-allowed; }
 .control-group.disabled { opacity: 0.5; }
 
-/* --- 已修改：次要按钮样式 --- */
 .btn-secondary {
-    background-color: #17a2b8; /* A distinct teal color */
+    background-color: #17a2b8;
     font-size: 14px;
     padding: 10px;
 }
-.btn-secondary:hover { background-color: #138496; } /* A darker teal for hover */
+.btn-secondary:hover { background-color: #138496; }
 
 /* 右侧内容展示区 */
 #display-panel {
@@ -86,9 +85,17 @@ button:disabled { background-color: #c0c0c0; cursor: not-allowed; }
 #results-display { border: 1px solid #ddd; padding: 20px; border-radius: 5px; background-color: #f8f9fa; flex-grow: 1; overflow-y: auto; }
 #results-content pre { white-space: pre-wrap; word-wrap: break-word; font-family: "Courier New", Courier, monospace; font-size: 14px; margin: 0; }
 
-/* --- 定制化结果显示样式 --- */
-.xml-display ul { list-style-type: none; padding-left: 20px; }
-.xml-display.tag-name { font-weight: bold; color: #0056b3; }
+/* --- 面单 (XML) 结果显示样式 --- */
+.waybill-result-container h4 { margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+.waybill-result-container h4:first-child { margin-top: 0; }
+.xml-item { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+.xml-key { font-weight: bold; padding-right: 15px; }
+.xml-value { text-align: right; }
+.data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.data-table th,.data-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+.data-table th { background-color: #e9ecef; }
+
+/* --- 发票 (JSON) 结果显示样式 --- */
 .invoice-summary { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ccc; }
 .summary-item { display: flex; justify-content: space-between; padding: 5px 0; }
 .summary-item.key { font-weight: bold; }
