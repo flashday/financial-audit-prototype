@@ -17,7 +17,7 @@
         <aside id="control-panel">
             <div class="control-group">
                 <h2>1. 上传图片</h2>
-                <p>点击下方按钮，从本地选择并上传单据图片。</p>
+                <p>点击下方按钮,从本地选择并上传单据图片。</p>
                 <button data-action="upload">上传单据</button>
             </div>
 
@@ -31,6 +31,7 @@
             <div id="audit-step" class="control-group disabled">
                 <h2>3. 智能审核</h2>
                 <button data-action="audit" disabled>3. 智能审核</button>
+                <button data-action="manage-prompts" class="btn-secondary" disabled>管理提示词</button>
             </div>
         </aside>
 
@@ -57,7 +58,7 @@
 
     <div id="upload-modal" class="modal-overlay hidden">
         <div class="modal-content">
-            <span class="modal-close-btn">&times;</span>
+            <span class="modal-close-btn" data-modal-id="upload-modal">&times;</span>
             <h2>上传单据</h2>
             <p>请分别为三个类别选择本地图片文件。</p>
             <div class="upload-area">
@@ -81,6 +82,18 @@
                 </div>
             </div>
             <button id="confirm-upload-btn" disabled>确认上传</button>
+        </div>
+    </div>
+
+    <div id="prompts-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="modal-close-btn" data-modal-id="prompts-modal">&times;</span>
+            <h2>管理审核提示词</h2>
+            <div id="prompts-list"></div>
+            <div class="prompt-edit-area">
+                <textarea id="prompt-input" placeholder="在此输入新的提示词或编辑现有提示词..."></textarea>
+                <button id="save-prompt-btn" data-mode="add">添加提示词</button>
+            </div>
         </div>
     </div>
 
