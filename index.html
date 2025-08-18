@@ -17,8 +17,8 @@
         <aside id="control-panel">
             <div class="control-group">
                 <h2>1. 上传图片</h2>
-                <p>点击下方按钮，模拟上传面单、发票、附件三类单据。</p>
-                <button data-action="upload">模拟上传</button>
+                <p>点击下方按钮，从本地选择并上传单据图片。</p>
+                <button data-action="upload">上传单据</button>
             </div>
 
             <div id="recognition-step" class="control-group disabled">
@@ -54,6 +54,35 @@
         </section>
 
     </main>
+
+    <div id="upload-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h2>上传单据</h2>
+            <p>请分别为三个类别选择本地图片文件。</p>
+            <div class="upload-area">
+                <div class="upload-item">
+                    <label for="waybill-input">面单:</label>
+                    <input type="file" id="waybill-input" class="file-input" data-type="waybill" accept="image/*">
+                    <img class="preview-img" id="waybill-preview" src="" alt="面单预览">
+                    <span class="upload-status">未选择</span>
+                </div>
+                <div class="upload-item">
+                    <label for="invoice-input">发票:</label>
+                    <input type="file" id="invoice-input" class="file-input" data-type="invoice" accept="image/*">
+                    <img class="preview-img" id="invoice-preview" src="" alt="发票预览">
+                    <span class="upload-status">未选择</span>
+                </div>
+                <div class="upload-item">
+                    <label for="attachment-input">附件:</label>
+                    <input type="file" id="attachment-input" class="file-input" data-type="attachment" accept="image/*">
+                    <img class="preview-img" id="attachment-preview" src="" alt="附件预览">
+                    <span class="upload-status">未选择</span>
+                </div>
+            </div>
+            <button id="confirm-upload-btn" disabled>确认上传</button>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
