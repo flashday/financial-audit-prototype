@@ -101,7 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 button.classList.remove('processing');
                 button.classList.add('success');
                 button.dataset.status = 'success';
-                button.innerHTML = `✓ 查看结果`;
+                
+                // --- 已修改：根据按钮原始文本生成新的成功文本 ---
+                const docType = originalText.replace(/2\.\d\s*识别/g, '').trim(); // "面单", "发票", "附件"
+                button.innerHTML = `✓ ${docType}结果`;
+                
                 button.disabled = false;
                 checkAllRecognized();
             }, randomDelay);

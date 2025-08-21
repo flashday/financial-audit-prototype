@@ -78,17 +78,17 @@ button:disabled { background-color: #c0c0c0; cursor: not-allowed; opacity: 0.7; 
     100% { background-position: -200% 0; }
 }
 
-button.processing {
+button[data-status="processing"] {
     background-image: linear-gradient(90deg, #007bff 0%, #00a1ff 50%, #007bff 100%);
     background-size: 200% 100%;
     animation: processing-animation 2s linear infinite;
     color: white;
 }
 
-button.success {
+button[data-status="success"] {
     background-color: #28a745; /* Green for success */
 }
-button.success:hover {
+button[data-status="success"]:hover {
     background-color: #218838;
 }
 
