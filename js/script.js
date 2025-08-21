@@ -117,9 +117,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const buttons = recognitionStep.querySelectorAll('button');
         const allDone = Array.from(buttons).every(btn => btn.dataset.status === 'success');
         if (allDone) {
-            auditStep.classList.remove('disabled');
-            auditStep.querySelectorAll('button').forEach(btn => btn.disabled = false);
+            startAuditSimulation();
         }
+    }
+
+    // --- 新增：启动智能审核模拟 ---
+    function startAuditSimulation() {
+        const auditButton = auditStep.querySelector('[data-action="audit"]');
+        const managePromptsButton = auditStep.querySelector('[data-action="manage-prompts"]');
+
+        auditStep.classList.remove('disabled');
+        auditButton.disabled = true;
+        managePromptsButton.disabled = true;
+
+        setTimeout(() => {
+            auditButton.dataset.status = 'processing';
+            auditButton.innerHTML = `<span class="spinner"></span> 智能审核中...`;
+
+            setTimeout(() => {
+                auditButton.dataset.status = 'success';
+                auditButton.innerHTML = `✓ 审核结果`;
+                auditButton.disabled = false;
+                managePromptsButton.disabled = false;
+            }, 5000); // 5-second audit duration
+
+        }, 2000); // 2-second delay before audit starts
     }
 
     function updateDisplay(action) {
