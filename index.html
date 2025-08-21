@@ -17,15 +17,15 @@
         <aside id="control-panel">
             <div class="control-group">
                 <h2>1. 上传图片</h2>
-                <p>点击下方按钮,从本地选择并上传单据图片。</p>
+                <p>点击下方按钮，从本地选择并上传单据图片。</p>
                 <button data-action="upload">上传单据</button>
             </div>
 
-            <div id="recognition-step" class="control-group disabled">
+            <div id="recognition-step" class="control-group">
                 <h2>2. 识别</h2>
-                <button data-action="recognize-waybill" disabled>2.1 识别面单</button>
-                <button data-action="recognize-invoice" disabled>2.2 识别发票</button>
-                <button data-action="recognize-attachment" disabled>2.3 识别附件</button>
+                <button data-action="recognize-waybill" data-status="idle" disabled>2.1 识别面单</button>
+                <button data-action="recognize-invoice" data-status="idle" disabled>2.2 识别发票</button>
+                <button data-action="recognize-attachment" data-status="idle" disabled>2.3 识别附件</button>
             </div>
 
             <div id="audit-step" class="control-group disabled">

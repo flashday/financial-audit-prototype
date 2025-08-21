@@ -43,7 +43,10 @@ header h1 {
 
 /* 按钮样式 */
 button {
-    display: block;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
@@ -54,10 +57,12 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative; /* Needed for pseudo-elements */
+    overflow: hidden; /* Hide overflowing animation */
 }
 
 button:hover { background-color: #0056b3; }
-button:disabled { background-color: #c0c0c0; cursor: not-allowed; }
+button:disabled { background-color: #c0c0c0; cursor: not-allowed; opacity: 0.7; }
 .control-group.disabled { opacity: 0.5; }
 
 .btn-secondary {
@@ -66,6 +71,39 @@ button:disabled { background-color: #c0c0c0; cursor: not-allowed; }
     padding: 10px;
 }
 .btn-secondary:hover { background-color: #138496; }
+
+/* --- 新增：按钮处理中和成功状态 --- */
+@keyframes processing-animation {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+button.processing {
+    background-image: linear-gradient(90deg, #007bff 0%, #00a1ff 50%, #007bff 100%);
+    background-size: 200% 100%;
+    animation: processing-animation 2s linear infinite;
+    color: white;
+}
+
+button.success {
+    background-color: #28a745; /* Green for success */
+}
+button.success:hover {
+    background-color: #218838;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 
 /* 右侧内容展示区 */
 #display-panel {

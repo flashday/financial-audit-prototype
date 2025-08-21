@@ -1,55 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
- // --- Part 1: 数据与状态管理 ---
+    // --- Part 1: 数据与状态管理 ---
     const mockData = {
-        'recognize-waybill': {
-            image: 'img/waybill_sample.png',
-            format: 'xml',
-            results: `<?xml version="1.0" encoding="UTF-8"?>
-<document>
-    <page>
-        <item>
-            <name>运单号</name>
-            <value>SF1234567890123</value>
-        </item>
-        <item>
-            <name>寄件人</name>
-            <value>张三, 13800138000</value>
-        </item>
-        <item>
-            <name>收件人</name>
-            <value>李四, 13900139000</value>
-        </item>
-        <item>
-            <name>物品</name>
-            <value>文件</value>
-        </item>
-        <table name="费用明细">
-            <thead>
-                <tr>
-                    <th>项目</th>
-                    <th>金额</th>
-                    <th>备注</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>运费</td>
-                    <td>18.00</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>保价费</td>
-                    <td>2.00</td>
-                    <td>保价2000元</td>
-                </tr>
-            </tbody>
-        </table>
-    </page>
-</document>`
-        },
+        'recognize-waybill': { image: 'img/waybill_sample.png', format: 'xml', results: `<?xml version="1.0" encoding="UTF-8"?><document><page><item><name>运单号</name><value>SF1234567890123</value></item><item><name>寄件人</name><value>张三, 13800138000</value></item><item><name>收件人</name><value>李四, 13900139000</value></item><item><name>物品</name><value>文件</value></item><table name="费用明细"><thead><tr><th>项目</th><th>金额</th><th>备注</th></tr></thead><tbody><tr><td>运费</td><td>18.00</td><td></td></tr><tr><td>保价费</td><td>2.00</td><td>保价2000元</td></tr></tbody></table></page></document>` },
         'recognize-invoice': { image: 'img/invoice_sample.png', format: 'json', results: { "类型": "增值税普通发票", "发票代码": "031001900111", "发票号码": "GHOHH_1", "开票日期": "2019-10-31", "购买方": { "名称": "Dr. 约翰· 多" }, "销售方": { "名称": "开科思（上海）商务信息咨询有限公司" }, "金额合计": "3089.90", "税额合计": "174.90", "发票详单": [{ "项目名称": "标准润色 Job code: GHOHH_1", "金额": "1827.00", "税率": "6%" }, { "项目名称": "稿件格式排版", "金额": "1088.00", "税率": "6%" }] } },
-        'recognize-attachment': { image: 'img/attachment_sample.png', format: 'text', results: `Approved\n\n地区设备销售部李某某 \n某某设备（上海）有限公司\n预算：250RMB/人Total:6人=1100RMB` },
+        'recognize-attachment': { image: 'img/attachment_sample.png', format: 'text', results: `Approved\n\n地区设备销售部李晓骏\nKOKUSAI ELECTRIC\n科意半导体设备（上海）有限公司\n预算：350RMB/人Total:6人=2100RMB` },
         'audit': { images: ['img/waybill_sample.png', 'img/invoice_sample.png', 'img/attachment_sample.png'], format: 'json', results: { "审核结果": "审核通过", "审核规则符合项": [{ "规则": "发票与附件金额匹配", "状态": "通过" }, { "规则": "发票信息合规性检查", "状态": "通过" }, { "规则": "报销政策检查", "状态": "通过" }], "风险提示": "无" } }
     };
 
@@ -126,8 +81,41 @@ document.addEventListener('DOMContentLoaded', () => {
         mockData['audit'].images = [appState.uploads.waybill, appState.uploads.invoice, appState.uploads.attachment];
 
         uploadModal.classList.add('hidden');
-        recognitionStep.classList.remove('disabled');
-        recognitionStep.querySelectorAll('button').forEach(btn => btn.disabled = false);
+        startRecognitionSimulation();
+    }
+
+    // --- 新增：启动识别模拟 ---
+    function startRecognitionSimulation() {
+        const buttons = recognitionStep.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.disabled = true;
+            button.dataset.status = 'processing';
+            button.classList.add('processing');
+            
+            const originalText = button.textContent;
+            button.innerHTML = `<span class="spinner"></span> 识别中...`;
+
+            const randomDelay = Math.random() * 5000 + 5000; // 5-10 seconds
+
+            setTimeout(() => {
+                button.classList.remove('processing');
+                button.classList.add('success');
+                button.dataset.status = 'success';
+                button.innerHTML = `✓ 查看结果`;
+                button.disabled = false;
+                checkAllRecognized();
+            }, randomDelay);
+        });
+    }
+
+    // --- 新增：检查所有识别是否完成 ---
+    function checkAllRecognized() {
+        const buttons = recognitionStep.querySelectorAll('button');
+        const allDone = Array.from(buttons).every(btn => btn.dataset.status === 'success');
+        if (allDone) {
+            auditStep.classList.remove('disabled');
+            auditStep.querySelectorAll('button').forEach(btn => btn.disabled = false);
+        }
     }
 
     function updateDisplay(action) {
@@ -152,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let contentHtml = '';
         if (action === 'audit') {
-            const randomPrompt = auditPrompts[Math.floor(Math.random() * auditPrompts.length)];
+            const randomPrompt = auditPrompts.length > 0? auditPrompts[Math.floor(Math.random() * auditPrompts.length)] : "无可用提示词";
             const auditResultWithPrompt = {...data.results, "模拟使用提示词": randomPrompt };
             contentHtml = renderDefaultJson(auditResultWithPrompt);
         } else {
@@ -165,16 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         resultsContent.innerHTML = contentHtml;
         resultsDisplay.classList.remove('hidden');
-
-        // 检查是否所有识别都已完成
-        if (action.startsWith('recognize-')) {
-            controlPanel.querySelector(`[data-action="${action}"]`).dataset.recognized = 'true';
-            const allRecognized =!Array.from(recognitionStep.querySelectorAll('button')).some(btn =>!btn.dataset.recognized);
-            if (allRecognized) {
-                auditStep.classList.remove('disabled');
-                auditStep.querySelectorAll('button').forEach(btn => btn.disabled = false);
-            }
-        }
     }
 
     // --- Part 5: 提示词管理功能 ---
@@ -186,15 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderPrompts() {
         promptsList.innerHTML = '';
         if (auditPrompts.length === 0) {
-            promptsList.innerHTML = '<p>暂无提示词,请在下方添加。</p>';
+            promptsList.innerHTML = '<p>暂无提示词，请在下方添加。</p>';
             return;
         }
         auditPrompts.forEach((prompt, index) => {
             const item = document.createElement('div');
             item.className = 'prompt-item';
             item.innerHTML = `
-                <span>${prompt}</span>
-                <div>
+                <span>${prompt.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span>
+                <div class="actions">
                     <button class="btn-secondary" data-action="edit-prompt" data-index="${index}">编辑</button>
                     <button class="btn-secondary" data-action="delete-prompt" data-index="${index}">删除</button>
                 </div>
@@ -259,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsDataURL(file);
     }
 
-      // --- Part 7: 渲染函数 ---
+    // --- Part 7: 渲染函数 ---
     function renderWaybillXml(xmlString) {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlString, "text/xml");
